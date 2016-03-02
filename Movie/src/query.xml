@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	<movie>
+		<getAllMovie>
+			SELECT  M.*
+			        , G.GRADE_TITLE
+			        , AC.ACTOR_COUNT
+			FROM    MOVIE M
+			        , GRADE G
+			        , (
+			            SELECT  MOVIE_ID, COUNT(ACTOR_LIST_ID) ACTOR_COUNT
+			            FROM ACTOR_LIST
+			            GROUP BY MOVIE_ID
+			          ) AC
+			WHERE   M.GRADE_ID = G.GRADE_ID
+			AND     AC.MOVIE_ID(+) = M.MOVIE_ID
+		</getAllMovie>
+		<getOneMovieInfoByMovieId>
+			SELECT  M.*
+			        , G.GRADE_TITLE
+			FROM    MOVIE M
+			        , GRADE G
+			WHERE   M.GRADE_ID = G.GRADE_ID
+			AND		M.MOVIE_ID = ?
+		</getOneMovieInfoByMovieId>
+		
+		<insertNewMovie>
+		INSERT  INTO MOVIE  (
+		                        MOVIE_ID
+		                        , TITLE
+		                        , RATE
+		                        , RUNNING_TIME
+		                        , OPEN_DATE
+		                        , GRADE_ID
+		                    )
+		        VALUES      (
+		                        MOVIE_ID_SEQ.NEXTVAL
+		                        , ?
+		                        , ?
+		                        , ?
+		                        , TO_DATE(?, 'YYYY-MM-DD')
+		                        , ?
+		                    )
+		</insertNewMovie>
+		
+		<getLatestMovieId>
+		SELECT  MOVIE_ID_SEQ.CURRVAL
+		FROM    DUAL
+		</getLatestMovieId>
+	</movie>
+	<director>
+		<getAllDirectors>
+			SELECT  D.*
+			FROM    DIRECTOR D
+		</getAllDirectors>
+		<getDirectorsByMovieId>
+			SELECT  DIRECTOR_NAME
+			FROM    DIRECTOR D
+					, DIRECTED_MOVIE DM
+			WHERE	D.DIRECTOR_ID = DM.DIRECTOR_ID
+			AND		DM.MOVIE_ID = ?
+		</getDirectorsByMovieId>
+		<insertNewDirectorOfNewMovie>
+		INSERT  INTO DIRECTED_MOVIE (
+		                            DIRECTED_MOVIE_ID
+		                            , DIRECTOR_ID
+		                            , MOVIE_ID
+		                        )
+		VALUES                  (
+		                            DIRECTED_MOVIE_ID_SEQ.NEXTVAL
+		                            , ?
+		                            , ?
+		                        )		
+		</insertNewDirectorOfNewMovie>
+		<getLatestDirectorId>
+		SELECT  DIRECTED_MOVIE_ID_SEQ.CURRVAL
+		FROM    DUAL
+		</getLatestDirectorId>			
+	</director>
+	<actor>
+		<getAllActors>
+			SELECT  A.*
+			FROM    ACTOR A
+		</getAllActors>
+		<getActorsByMovieId>
+			SELECT  ACTOR_NAME
+			FROM    ACTOR A
+					, ACTOR_LIST AL
+			WHERE	A.ACTOR_ID = AL.ACTOR_ID
+			AND		AL.MOVIE_ID = ?
+		</getActorsByMovieId>
+		<insertNewActor>
+			INSERT INTO ACTOR	(
+									ACTOR_ID
+									, ACTOR_NAME
+								)
+			VALUES				(
+									ACTOR_ID_SEQ.NEXTVAL
+									, ?
+								)
+		</insertNewActor>
+		<insertNewActorOfNewMovie>
+		INSERT  INTO ACTOR_LIST (
+		                            ACTOR_LIST_ID
+		                            , MOVIE_ID
+		                            , ACTOR_ID
+		                        )
+		VALUES                  (
+		                            ACTOR_LIST_ID_SEQ.NEXTVAL
+		                            , ?
+		                            , ?
+		                        )		
+		</insertNewActorOfNewMovie>
+		<getLatestActorId>
+		SELECT  ACTOR_LIST_ID_SEQ.CURRVAL
+		FROM    DUAL
+		</getLatestActorId>			
+	</actor>
+	<genre>
+		<getAllGenres>
+			SELECT  G.*
+			FROM    GENRE G
+		</getAllGenres>
+		<getGenresByMovieId>
+			SELECT  GENRE_TITLE
+			FROM    GENRE G
+					, GENRE_LIST GL
+			WHERE	G.GENRE_ID = GL.GENRE_ID
+			AND		GL.MOVIE_ID = ?
+		</getGenresByMovieId>
+		<insertNewGenreOfNewMovie>
+		INSERT  INTO GENRE_LIST (
+		                            GENRE_LIST_ID
+		                            , MOVIE_ID
+		                            , GENRE_ID
+		                        )
+		VALUES                  (
+		                            GENRE_LIST_ID_SEQ.NEXTVAL
+		                            , ?
+		                            , ?
+		                        )
+		</insertNewGenreOfNewMovie>
+		<getLatestGenreId>
+		SELECT  GENRE_LIST_ID_SEQ.CURRVAL
+		FROM    DUAL
+		</getLatestGenreId>		
+	</genre>
+	<grade>
+		<getAllGrades>
+			SELECT	G.*
+			FROM	GRADE G
+		</getAllGrades>
+	</grade>
+</query>
