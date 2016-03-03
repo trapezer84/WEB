@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+div#rightTop {
+	margin-left: 10px;
+	background-color: #408080;
+	width: 30%;
+	height: 385px;
+	float: right;
+}
+
