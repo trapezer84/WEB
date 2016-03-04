@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	<member>
+		<getMemberByIdAndPassword>
+			SELECT	MEMBER_ID
+					, NICK_NAME
+					, PASSWORD
+					, EMAIL
+			FROM	MEMBERS
+			WHERE	MEMBER_ID = ?
+			AND		PASSWORD = ?
+		</getMemberByIdAndPassword>
+	</member>
+	<article>
+	
+	</article>
+</query>

@@ -1,7 +1,7 @@
 package com.ktds.leinalee.member.vo;
 
 public class MemberVO {
-
+	
 	private String memberId;
 	private String nickName;
 	private String password;

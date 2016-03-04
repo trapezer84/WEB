@@ -4,12 +4,12 @@ div#login {
 	text-align: right;
 }
 
-div#login input {
-	margin-bottom: 10px;
+div#login input{
+	margin-botton: 10px;
 	float: right;
 }
 
-#btnlogin {
-	height: 38px;
+#btnLogin {
+	height: 30px;
 	float: right;
 }
