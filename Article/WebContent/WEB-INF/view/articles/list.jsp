@@ -8,13 +8,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="./resource/css/list.css" />
+<link rel="stylesheet" type="text/css" href="/resource/css/list.css" />
 <title>게시판 리스트</title>
 </head>
 <body>
 
+<div id="listWrapper">
 <h1>Article list</h1>
-<div>
 <table>
 	<tr>
 		<td>번호</td>
@@ -27,12 +27,14 @@
 	<c:forEach items="${ articleList }" var="article">
 	<tr>
 		<td>${article.articleId}</td>
-		<td id="title"><a href="/detail?title=${article.title}">${article.title}</a></td>
+		<td id="title"><a href="/detail?articleId=${article.articleId}">${article.title}</a></td>
 		<td>${article.nickName}</td>
 		<td>${article.hits}</td>
-		<td>${article.recommends}</td>
+		<td>${article.recommends}
+		<a href="/recommend?articleId=${article.articleId}"><img src="./resource/img/thumbsup.png" id="thumbsup" /></a></td>
 	</tr>
 	</c:forEach>
+	
 	
 </table>
 </div>

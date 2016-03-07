@@ -33,7 +33,18 @@
 			FROM    ARTICLES A
 			        , MEMBERS M
 			WHERE   M.MEMBER_ID = A.MEMBER_ID
-			AND     TITLE = ?		
+			AND     ARTICLE_ID = ?		
 		</getArticleByArticleTitle>
+		<updateHits>
+			UPDATE  ARTICLES
+			SET     HITS = HITS + 1
+			WHERE   ARTICLE_ID = ?
+		</updateHits>
+		
+		<recommendArticle>
+			UPDATE  ARTICLES
+			SET     RECOMMENDS = RECOMMENDS + 1
+			WHERE   ARTICLE_ID = ?			
+		</recommendArticle>
 	</articles>
 </query>

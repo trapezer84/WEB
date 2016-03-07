@@ -10,13 +10,29 @@ body, input, div, span, p, a, td, th, caption, h1, h2, h3, h4, h5, h6,
 
 table {
     border-collapse: collapse;
+    background-color: #d7d7d7;
 }
 
 table, td, th {
     border: 1px solid black;
+    height: 50px;
+    width: 600px;
 }
 
 td#title {
 	text-align: left;
 }
 
+#listWrapper {
+	width: 50%; 
+	margin: auto;
+}
+
+h1 {
+	color: #333333;
+}
+
+#thumbsup {
+	height: 30px;	
+	float: right;
+}

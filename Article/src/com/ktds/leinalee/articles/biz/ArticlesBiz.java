@@ -25,10 +25,10 @@ public class ArticlesBiz {
 		return articleList;
 	}
 	
-	public List<ArticlesVO> getArticle(HttpServletRequest request, String title) {
+	public List<ArticlesVO> getArticle(HttpServletRequest request, String articleId) {
 		
 		// 1. 회원 정보를 가져온다.
-		List<ArticlesVO> articleList = articlesDAO.getArticleByArticleTitle(title);
+		List<ArticlesVO> articleList = articlesDAO.getArticleByArticleTitle(articleId);
 		
 		// 4. 결과를 보고한다.
 		return articleList;

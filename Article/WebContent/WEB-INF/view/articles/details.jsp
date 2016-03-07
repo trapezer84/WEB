@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="./resource/css/details.css" />
+<link rel="stylesheet" type="text/css" href="/resource/css/details.css" />
 <title>게시판 글 (detailed page)</title>
-<script type="text/javascript" src="/Movie/resource/js/jquery-1.12.1.js"></script>
+<script type="text/javascript" src="/resource/js/jquery-1.12.1.js"></script>
 <script type="text/javascript">
 	$(document).ready( function() {
 		$("#recommendArticle").click( function(){
@@ -21,7 +21,8 @@
 </head>
 <body>
 
-<div>
+<div id="detailsWrapper">
+<h1>Detailed Page</h1>
 <table>
 	<tr id="title">
 		<td>글 번호</td>
@@ -45,7 +46,7 @@
 		
 		<td colspan="4">글 내용 </td>
 	</tr>
-	<tr>
+	<tr id="descript">
 		<c:forEach items="${ articles }" var="articles">
 		<td colspan="4">${articles.descript}</td> </c:forEach>
 	</tr>
@@ -58,11 +59,15 @@
 		<c:forEach items="${ articles }" var="articles">
 		<td colspan="2">${articles.hits}</td> </c:forEach>
 		<c:forEach items="${ articles }" var="articles">
-		<td colspan="2">${articles.recommends}</td> </c:forEach>
+		<td colspan="2">${articles.recommends} 
+		<a href="/recommend?articleId=${articles.articleId}"><img src="./resource/img/thumbsup.png" id="thumbsup" /></a>
+		</td></c:forEach>
 	</tr>
 </table>
 
-<input type="button" id="recommendArticle" value="추천하기" />
+
+<a href="/list" ><img src="/resource/img/goback.png" id="goback"/></a>
+
 
 </div>
 

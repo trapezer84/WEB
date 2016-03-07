@@ -57,4 +57,14 @@
     <servlet-name>detailServlet</servlet-name>
     <url-pattern>/detail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RecommendArticleServlet</display-name>
+    <servlet-name>RecommendArticleServlet</servlet-name>
+    <servlet-class>com.ktds.leinalee.articles.web.RecommendArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecommendArticleServlet</servlet-name>
+    <url-pattern>/recommend</url-pattern>
+  </servlet-mapping>
 </web-app>
