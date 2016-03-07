@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.ktds.leinalee.Consts;
 import com.ktds.leinalee.member.vo.MemberVO;
 import com.ktds.leinalee.util.xml.XML;
 
@@ -30,7 +31,7 @@ public class MemberDAO {
 		try {
 			
 			// DB에 연결한다.
-			conn = DriverManager.getConnection(Const.DB_URL, Const.DB_ARTICLE_USER, Const.DB_ARTICLE_PASSWORD);
+			conn = DriverManager.getConnection(Consts.DB_URL, Consts.DB_ARTICLE_USER, Consts.DB_ARTICLE_PASSWORD);
 
 			// Query를 입력한다.
 			String query = XML.getNodeString("//query/member/getMemberByIdAndPassword/text()");

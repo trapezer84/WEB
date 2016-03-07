@@ -28,4 +28,33 @@
     <filter-name>CharaterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>
+    <display-name>SessionCheckFilter</display-name>
+    <filter-name>SessionCheckFilter</filter-name>
+    <filter-class>com.ktds.leinalee.filter.SessionCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionCheckFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListServlet</display-name>
+    <servlet-name>ListServlet</servlet-name>
+    <servlet-class>com.ktds.leinalee.articles.web.ListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListServlet</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>detailServlet</display-name>
+    <servlet-name>detailServlet</servlet-name>
+    <servlet-class>com.ktds.leinalee.articles.web.detailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>detailServlet</servlet-name>
+    <url-pattern>/detail</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -60,7 +60,7 @@ public class DoLoginServlet extends HttpServlet {
 		}
 		// 로그인이 실패했다면
 		else {
-			response.sendRedirect("/login?errorCode=1");
+			response.sendRedirect("/?errorCode=1");
 			return;
 		}
 	}

@@ -11,7 +11,29 @@
 			AND		PASSWORD = ?
 		</getMemberByIdAndPassword>
 	</member>
-	<article>
-	
-	</article>
+	<articles>
+		<getArticles>
+ 			SELECT	ARTICLE_ID
+                    , TITLE
+                    , HITS
+                    , RECOMMENDS
+					, M.NICK_NAME
+			FROM	ARTICLES A
+					, MEMBERS M
+			WHERE	M.MEMBER_ID = A.MEMBER_ID
+		</getArticles>
+		<getArticleByArticleTitle>
+			SELECT  ARTICLE_ID
+			        , TITLE
+			        , NICK_NAME
+			        , M.MEMBER_ID
+			        , DESCRIPT
+			        , HITS
+			        , RECOMMENDS
+			FROM    ARTICLES A
+			        , MEMBERS M
+			WHERE   M.MEMBER_ID = A.MEMBER_ID
+			AND     TITLE = ?		
+		</getArticleByArticleTitle>
+	</articles>
 </query>

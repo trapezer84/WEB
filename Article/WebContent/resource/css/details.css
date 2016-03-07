@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body, input, div, span, p, a, td, th, caption, h1, h2, h3, h4, h5, h6,
+	textarea, iframe, ul, al, li, dd, dt, b, u, i, string, pre, code,
+	address, city, header, aside {
+	color: #333333; /*검은색*/
+	font-family: "나눔바른고딕", 맑은 고딕", "돋움체";
+	font-size: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+tr#title {
+	text-align: center;
+}
+

@@ -1,6 +1,6 @@
-package com.ktds.leinalee.member.dao;
+package com.ktds.leinalee;
 
-public interface Const {
+public interface Consts {
 	public static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	
 	// HR
