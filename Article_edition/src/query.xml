@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	<member>
+		<getMemberByIdAndPassword>
+			SELECT	MEMBER_ID
+					, NICK_NAME
+					, PASSWORD
+					, EMAIL
+			FROM	MEMBERS
+			WHERE	MEMBER_ID = ?
+			AND		PASSWORD = ?
+		</getMemberByIdAndPassword>
+	</member>
+	
+	<article>
+		<getAllArticles>
+ 			SELECT	ARTICLE_ID
+                    , TITLE
+                    , HITS
+                    , RECOMMENDS
+					, M.NICK_NAME
+			FROM	ARTICLES A
+					, MEMBERS M
+			WHERE	M.MEMBER_ID = A.MEMBER_ID
+		</getAllArticles>
+		
+		<getOneArticleByArticleId>
+			SELECT  ARTICLE_ID
+			        , TITLE
+			        , NICK_NAME
+			        , M.MEMBER_ID
+			        , DESCRIPT
+			        , HITS
+			        , RECOMMENDS
+			FROM    ARTICLES A
+			        , MEMBERS M
+			WHERE   M.MEMBER_ID = A.MEMBER_ID
+			AND     ARTICLE_ID = ?
+		</getOneArticleByArticleId>
+		
+		<updateHitsByArticleId>
+			UPDATE  ARTICLES
+			SET     HITS = HITS + 1
+			WHERE   ARTICLE_ID = ?
+		</updateHitsByArticleId>
+		
+		<updateRecommendsByArticleId>
+			UPDATE  ARTICLES
+			SET     RECOMMENDS = RECOMMENDS + 1
+			WHERE   ARTICLE_ID = ?	
+		</updateRecommendsByArticleId>
+		
+		<deleteArticleByArticleId>
+			DELETE	
+			FROM	ARTICLES
+			WHERE	ARTICLE_ID = ?
+		</deleteArticleByArticleId>
+	</article>
+</query>
