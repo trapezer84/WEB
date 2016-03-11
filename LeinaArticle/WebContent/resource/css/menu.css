@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+div#menuWrapper {
+	float: left;
+	background-color: #8ebe5a;
+	width: 320px;
+	height: 100%;
+	position: absolute;
+}
+
+div#menuWrapper img {
+	width: 150px;
+	margin-left: 50px;
+}
+
+#welcome {
+	background-color: #8ebe5a;
+	text-align: center;
+}
