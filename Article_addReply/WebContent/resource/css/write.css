@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+div#writeWrapper {
+   text-align: center;
+   float: left;
+   background-color: #9EC771;
+   height: 100%;
+   width: 750px;
+   margin-top: 5%;
+   margin-left: 20%;	
+}

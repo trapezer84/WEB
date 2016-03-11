@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+#title, #descrption {
+	text-align: center;
+}
+
+#tableList {
+	background-color: white;
+	text-align: center;
+	margin-left: 230px;
+	margin-top: 30px;
+}
+
+div#listWrapper {
+   text-align: center;
+   float: left;
+   background-color: #09abea;
+   height: 100%;
+   width: 750px;
+   margin-top: 20%;
+   margin-left: 20%;	
+}
