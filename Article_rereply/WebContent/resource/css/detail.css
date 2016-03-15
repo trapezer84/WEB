@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+div#detailWrapper {
+   text-align: center;
+   background-color: #9EC771;
+   height: 100%;
+   width: 750px;
+   margin-top: 5%;
+   margin-left: 20%;	
+}
+
+#articleDescript {
+	width: 550px;
+	height: 300px;
+}
+
+table#detailTable th {
+	background-color: #333333;
+	color: white;
+}
+
+div#reply {
+	text-align: left;
+}
