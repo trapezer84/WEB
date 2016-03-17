@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+div#logoutWrapper {
+	width: 100px;
+	margin-top: 10px;
+	margin-right: 50px;
+	float: right;
+}
+
+div#logoutWrapper img#btnLogout {
+	height: 100%;
+	width: 100%;
+}
+

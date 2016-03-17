@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+div#footerWrapper {
+	background-color: #333333;
+	color: #ffffff;
+	text-align: center;
+	width: 100%;
+	bottom: 0;
+}

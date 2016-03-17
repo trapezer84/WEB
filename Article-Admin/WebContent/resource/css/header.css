@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+
+/* Reset */
+html, body, div, span, p, a, td, th, caption, lable, h1, h2, h3,
+	h4, h5, h6, textarea, iframe, ul, ol, li, dd, dt, b, u, i, strong {
+	font-family: "나눔스퀘어", "나눔바른고딕", "돋움체";
+	color: #333333;
+	font-size: 12pt;
+	padding: 0;
+	margin: 0;
+	border-spacing: 0;
+}
+
+img {
+	/* 이미지 주변의 파란 줄 제거 */
+	border: none;
+}
+
+html, body {
+	width: 100%;
+	background-color: #8ebe5a;
+	margin: 0px;
+}
+
+div {
+	position: relative;
+	float: left;
+}
+
+div#bodyWrapper {
+	width: 100%;
+}
+
+/* Main */
+div#mainImg img {
+	width: 100%;
+	height: 100%;
+}
+
+/* Header */
+div#headerwrapper {
+	background-color: #8ebe5a;
+	width: 100%;
+	height: 100%;
+}
+
+img#headerImg {
+	width: 120px;
+	height: 120px;
+	padding: 10px;
+	float: left;
+	margin-left: 10px;
+}
+
+img#headerTitle {
+	float: left;
+	height: 50px;
+}
+
+div#header {
+	width: 100%;
+}
+
+div#header div {
+	padding-top: 40px;
+	float: left;
+}
+
+div.clear {
+	/* 데이터 영역을 침범하지 않음 */
+	clear: both;
+}
+
+/* Top Menu */
+div#topNavi {
+	background-color: #333333;
+	height: 80px;
+	width: 100%;
+	margin-bottom: 6px;
+}
+
+div#topMenu {
+	/* 가로로 한줄 */
+	height: 100%;
+	list-style: none;
+}
+
+div#topMenu ul, li, a {
+	height: 100%;
+}
+
+div#topMenu ul {
+	
+}
+
+div#topMenu li {
+	padding-top: 28px;
+	margin-left: 20px;
+	list-style: none;
+	float: left;
+	margin-left: 20px;
+}
+
+div#topMenu a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/* Left Menu */
+div#leftMenu {
+	float: left;
+	width: 260px;
+	padding: 10px;
+	maring-right: 5px;
+	background-color: #333333;
+	color: white;
+	height: 650px;
+	margin-bottom: 6px;
+}
+
+div#leftMenu ul li:FIRST-CHILD {
+	padding-top: 0px;
+}
+
+div#leftMenu ul {
+	list-style: none;
+	padding: 15px;
+}
+
+div#leftMenu li {
+	color: white;
+	padding-bottom: 25px;
+}
+
+div#leftMenu a {
+	color: white;
+}

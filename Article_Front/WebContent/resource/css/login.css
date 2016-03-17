@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+div#loginWrapper {
+	margin-top: 15px;
+	float: right;
+}
+
+div#loginWrapper form#loginForm, a{
+	width:100%;
+	height:100%;
+}
+
+div#loginWrapper input {
+	margin-top: 2px;
+	height: 30px;
+	width: 220px;
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+div#loginWrapper img#btnLogin {
+	height: 38px;
+	margin-right: 10px;
+}
+
+div#loginWrapper img#btnJoin {
+	height: 40px;
+	margin-right: 10px;
+}
