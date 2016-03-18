@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	<reply>
+		<selectCountParentReplyId>
+			SELECT	COUNT(REPLY_ID)
+			FROM	REPLIES
+			WHERE	PARENT_REPLY_ID = ?
+		</selectCountParentReplyId>
+	
+		<selectMaxOrderNoByParentReplyId2>
+	         SELECT   ORDER_NO
+	         FROM   (
+	                        SELECT		*
+	                        FROM		REPLIES
+	                        START		WITH PARENT_REPLY_ID = ?
+	                        CONNECT		BY PARENT_REPLY_ID = REPLY_ID
+	                        ORDER		BY ORDER_NO DESC
+	               )
+	         WHERE   ROWNUM = 1
+		</selectMaxOrderNoByParentReplyId2>
+		
+		<selectMaxOrderNoByParentReplyId1>
+	         SELECT   	MAX(ORDER_NO)
+	         FROM   	REPLIES
+	         GROUP		BY PARENT_REPLY_ID
+	         HAVING		PARENT_REPLY_ID = ?
+		</selectMaxOrderNoByParentReplyId1>
+		
+		<selectMaxOrderNoByParentReplyId>
+	         SELECT   	ORDER_NO
+	         FROM   	(
+	         				SELECT	*
+	         				FROM	REPLIES
+	         				START	WITH REPLY_ID = ?
+	         				CONNECT	BY PRIOR REPLY_ID = PARENT_REPLY_ID
+	         				ORDER	BY ORDER_NO DESC
+	         			)
+	         WHERE		ROWNUM = 1			
+		</selectMaxOrderNoByParentReplyId>
+		
+		<selectLatestOrderNoByParentReplyId>
+			SELECT	ORDER_NO
+			FROM	REPLIES
+			WHERE	REPLY_ID = ?
+		</selectLatestOrderNoByParentReplyId>
+		
+		<updateOrderNobyGroupId>
+			UPDATE	REPLIES
+			SET		ORDER_NO = ORDER_NO + 1
+			WHERE	ORDER_NO >= ?
+			AND		GROUP_ID = ?
+		</updateOrderNobyGroupId>
+		
+		<insertReReply>
+			INSERT  INTO REPLIES    (
+			                            REPLY_ID
+			                            , MEMBER_ID
+			                            , ARTICLE_ID
+			                            , DESCRIPT
+			                            , GROUP_ID
+			                            , PARENT_REPLY_ID
+			                            , DEPTH
+			                            , ORDER_NO
+			                        ) 
+			VALUES                  ( 
+			                            REPLY_ID_SEQ.NEXTVAL
+			                            , ?
+			                            , ?
+			                            , ?
+			                            , ?
+			                            , ?
+			                            , ?
+			                            , ?                            
+			                        )	
+		</insertReReply>
+		
+		<insertReply>
+			INSERT  INTO REPLIES    (
+			                            REPLY_ID
+			                            , MEMBER_ID
+			                            , ARTICLE_ID
+			                            , DESCRIPT
+			                            , GROUP_ID
+			                            , PARENT_REPLY_ID
+			                            , DEPTH
+			                            , ORDER_NO
+			                        ) 
+			VALUES                  ( 
+			                            REPLY_ID_SEQ.NEXTVAL
+			                            , ?
+			                            , ?
+			                            , ?
+			                            , REPLY_ID_SEQ.NEXTVAL
+			                            , 0
+			                            , 0
+			                            , 0                            
+			                        )	
+		</insertReply>
+		
+		<getReplyListByArticleId>
+			SELECT	REPLY_ID 
+					, ARTICLE_ID
+					, M.MEMBER_ID
+					, DESCRIPT
+					, GROUP_ID
+					, PARENT_REPLY_ID
+					, DEPTH
+					, ORDER_NO
+			FROM	REPLIES R
+					, MEMBERS M
+			WHERE	R.MEMBER_ID = M.MEMBER_ID
+			AND		R.ARTICLE_ID = ?		
+			ORDER	BY GROUP_ID ASC
+					, ORDER_NO ASC		
+		</getReplyListByArticleId>
+	</reply>
+
+	<file>
+		<addFile>
+			INSERT	INTO	FILES	(
+										FILE_ID
+										, ARTICLE_ID
+										, FILE_NAME
+										, FILE_LOCATION
+									)
+			VALUES					(
+										FILE_ID_SEQ.NEXTVAL
+										, ?
+										, ?
+										, ?
+									)
+		</addFile>
+		
+		<deleteFile>
+			DELETE	
+			FROM	FILES
+			WHERE	ARTICLE_ID = ?		
+		</deleteFile>
+		
+		<getFileListByArticleId>
+			SELECT	FILE_ID
+					, FILE_NAME
+					, FILE_LOCATION
+			FROM	FILES
+			WHERE	ARTICLE_ID = ?
+		</getFileListByArticleId>
+	</file>
+
+	<member>
+		<getMemberByIdAndPassword>
+			SELECT	MEMBER_ID
+					, NICK_NAME
+					, PASSWORD
+					, EMAIL
+			FROM	MEMBERS
+			WHERE	MEMBER_ID = ?
+			AND		PASSWORD = ?
+		</getMemberByIdAndPassword>
+		
+		<addNewMember>
+			 INSERT INTO MEMBERS	(
+		   								MEMBER_ID
+		   								, NICK_NAME
+		   								, PASSWORD
+		   								,  EMAIL
+		   							) 
+			VALUES					( 
+										?
+										, ?
+										, ?
+										, ?
+									)		
+		</addNewMember>
+		
+		<isExistMember>
+				SELECT	COUNT(MEMBER_ID)
+				FROM	MEMBERS
+				WHERE	MEMBER_ID = ?				
+		</isExistMember>
+	</member>
+	
+	<article>
+		<getCurrentArticleId>
+			SELECT	ARTICLE_ID_SEQ.CURRVAL
+			FROM	DUAL
+		</getCurrentArticleId>
+		
+		<getAllArticleCount>
+ 			SELECT	COUNT(A.ARTICLE_ID)
+			FROM	ARTICLES A
+					, MEMBERS M
+			WHERE	M.MEMBER_ID = A.MEMBER_ID		
+		</getAllArticleCount>
+		
+		<getAllArticles>
+			SELECT	* 
+			FROM	(
+						SELECT	ROWNUM AS RNUM
+								, A.*
+						FROM	(
+									SELECT  A.ARTICLE_ID
+									        , TITLE
+									        , NICK_NAME
+									        , HITS
+									        , RECOMMENDS
+									        , COUNT(FILE_ID) FILE_COUNT
+									FROM    ARTICLES A
+									        , MEMBERS M
+									        , FILES F
+									WHERE   M.MEMBER_ID = A.MEMBER_ID
+									AND     A.ARTICLE_ID = F.ARTICLE_ID(+)
+									GROUP   BY A.ARTICLE_ID
+									        , TITLE
+									        , NICK_NAME
+									        , HITS
+									        , RECOMMENDS
+									ORDER   BY A.ARTICLE_ID DESC
+								) A 
+						WHERE	ROWNUM &lt;= ?	
+					)	
+			WHERE	RNUM >= ?		
+		</getAllArticles>
+		
+		<getOneArticleByArticleId>
+			SELECT  ARTICLE_ID
+			        , TITLE
+			        , NICK_NAME
+			        , M.MEMBER_ID
+			        , DESCRIPT
+			        , HITS
+			        , RECOMMENDS
+			FROM    ARTICLES A
+			        , MEMBERS M
+			WHERE   M.MEMBER_ID = A.MEMBER_ID
+			AND     ARTICLE_ID = ?
+		</getOneArticleByArticleId>
+		
+		<updateHitsByArticleId>
+			UPDATE  ARTICLES
+			SET     HITS = HITS + 1
+			WHERE   ARTICLE_ID = ?
+		</updateHitsByArticleId>
+		
+		<updateRecommendsByArticleId>
+			UPDATE  ARTICLES
+			SET     RECOMMENDS = RECOMMENDS + 1
+			WHERE   ARTICLE_ID = ?	
+		</updateRecommendsByArticleId>
+		
+		<deleteArticleByArticleId>
+			DELETE	
+			FROM	ARTICLES
+			WHERE	ARTICLE_ID = ?
+		</deleteArticleByArticleId>
+		
+		<addNewArticle>
+			INSERT	INTO ARTICLES	(
+										ARTICLE_ID 
+										, MEMBER_ID
+										, TITLE
+										, DESCRIPT
+										, HITS
+										, RECOMMENDS
+								 	)
+					VALUES 			(
+										ARTICLE_ID_SEQ.NEXTVAL						
+										, ?
+										, ?
+										, ?
+										, 0
+										, 0
+									)
+		</addNewArticle>
+		
+		<updateArticleOnlyTitle>
+			UPDATE	ARTICLES
+			SET		TITLE = ?
+			WHERE	ARTICLE_ID = ?
+		</updateArticleOnlyTitle>
+		
+		<updateArticleOnlyDescript>
+			UPDATE	ARTICLES
+			SET		DESCRIPT = ?
+			WHERE	ARTICLE_ID = ?
+		</updateArticleOnlyDescript>
+		
+		<updateArticle>
+			UPDATE	ARTICLES
+			SET		TITLE = ?
+					, DESCRIPT = ?
+			WHERE	ARTICLE_ID = ?
+		</updateArticle>
+	</article>
+	
+	<operationHistory>
+		<insertHistory>
+			INSERT INTO OPER_HIST   (
+			                                    HISTORY_ID
+			                                    , IP
+			                                    , MEMBER_ID
+			                                    , CRT_DT
+			                                    , URL
+			                                    , ACTION_CODE
+			                                    , DESCRIPTION
+			                                    , ETC
+			                                ) 
+			VALUES                          ( 
+			                                    HISTORY_ID_SEQ.NEXTVAL
+			                                    , ?
+			                                    , ?
+			                                    , SYSDATE
+			                                    , ? 
+			                                    , ?
+			                                    , ?
+			                                    , ?
+			                                )		
+		</insertHistory>
+	</operationHistory>
+	
+	<favorite>
+		<insertFavorite>
+			INSERT INTO FAVO	(
+			   						FAVO_ID
+			   						, ARTICLE_ID
+			   						, MEMBER_ID
+			   						, CRT_DT
+			   					) 
+			VALUES 				(
+									 FAVO_ID_SEQ.NEXTVAL
+									 , ?
+									 , ?
+									 , SYSDATE
+									 
+								)		
+		</insertFavorite>
+
+		<deleteFavorite>
+			DELETE	
+			FROM	FAVO
+			WHERE	ARTICLE_ID = ?
+			AND		MEMBER_ID = ?
+		</deleteFavorite>
+		
+		<selectFavoriteCount>
+			SELECT	COUNT(FAVO_ID)
+			FROM	FAVO
+			WHERE	ARTICLE_ID = ?
+			AND		MEMBER_ID = ?
+		</selectFavoriteCount>
+
+	</favorite>
+	
+</query>
