@@ -33,22 +33,21 @@
 
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" id="userId" name="userId" style="width:99%;"/></td>
+			<td><input type="text" id="userId" name="userId" style="width:100%;"/></td>
 		</tr>
 		
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" id="userPassword" name="userPassword" style="width:99%;"/></td>
+			<td><input type="password" id="userPassword" name="userPassword" style="width:100%;"/></td>
 		</tr>		
-			
 		<tr>
 			<th>별명(애칭)</th>
-			<td><input type="text" id="nickName" name="nickName" style="width:99%;"/></td>
+			<td><input type="text" id="nickName" name="nickName" style="width:100%;"/></td>
 		</tr>
 		
 		<tr>
 			<th>이메일</th>
-			<td><input type="email" id="userEmail" name="userEmail" style="width:99%;"/></td>
+			<td><input type="email" id="userEmail" name="userEmail" style="width:100%;"/></td>
 		</tr>	
 		
 		<tr>
